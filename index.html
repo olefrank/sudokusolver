@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="da" ng-app>
+
+<head>
+	<title>Sudoku Solver</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="css/meyer_css_reset.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	
+	<script src="lib/angular.min.js" type="text/javascript"></script>
+	<script src="js/SudokuController.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+	<div id="container" ng-controller="SudokuController">
+		<table>
+			<tr ng-repeat="row in solution">
+				<td ng-repeat="cell in row">
+					<input type="text" ng-show="cell.value != 0" ng-model="cell.value" ng-model-instant />
+				</td>
+			</tr>
+		</table>
+		<br>
+		
+		<div ng-switch on="isClicked">
+			<button ng-switch-when='false' ng-click='clickHandler()'>Løsning</button>
+			<button ng-switch-when='true' ng-click='clickHandler()'>Stop</button>
+		</div>
+		<p>{{numSteps}}</p>
+	</div>
+
+</body>
+
+</html>
