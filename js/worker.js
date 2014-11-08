@@ -1,22 +1,23 @@
 // listen for message event
 self.addEventListener('message', function(e) {
-	var grid = e.data.grid;
-	var row = e.data.row;
-	var col = e.data.col;
+	var grid = e.data.grid,
+	    row = e.data.row,
+	    col = e.data.col;
 
 	self.solveSudoku(grid, row, col);
 }, false);
 
 
 // solve sudoku with recursion
-var cell;
-var o = {};
+var cell,
+    o = {},
+    interval = 200000000;
 
 function solveSudoku(grid, row, col) {
 	cell = findUnassignedLocation(grid, row, col);
 	row = cell[0];
 	col = cell[1];
-	
+
 	// base case: no empty cells in grid
 	if (row == 9) {
 		postMessage("finished");
@@ -36,7 +37,7 @@ function solveSudoku(grid, row, col) {
 			};
 			postMessage(o); // send data back
 
-			//waitSome(500000000);
+			waitSome(interval);
 
 			// if success -> stop!
 			if ( solveSudoku(grid, row, col) ) { 				
@@ -52,7 +53,7 @@ function solveSudoku(grid, row, col) {
 			};
 			postMessage(o); // send data back
 
-			//waitSome(500000000);
+			waitSome(interval);
 		}	
 	}
 	return false;
@@ -114,10 +115,8 @@ function isBoxOk(grid, row, col, num) {
 	return true;
 }
 
-// function waitSome(val) {
-// 	var i = 0;
-
-// 	while (i < val) {
-// 		i++;
-// 	}
-// }
+function waitSome(val) {
+	while (val > 0) {
+		val--;
+	}
+}

@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="da" ng-app>
+<html lang="da" ng-app="app">
 
 <head>
 	<title>Sudoku Solver</title>
@@ -9,12 +9,13 @@
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	
 	<script src="lib/angular.min.js" type="text/javascript"></script>
-	<script src="js/SudokuController.js" type="text/javascript"></script>
+	<script src="js/game.controller.js" type="text/javascript"></script>
+	<script src="js/solution.service.js"></script>
 </head>
 
 <body>
 
-	<div id="container" ng-controller="SudokuController">
+	<div id="container" ng-controller="gameCtrl">
 		<table>
 			<tr ng-repeat="row in solution">
 				<td ng-repeat="cell in row">
