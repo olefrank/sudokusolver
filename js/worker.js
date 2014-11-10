@@ -13,19 +13,20 @@ var cell,
     o = {},
     interval = 200000000;
 
+/** Recursive function to solve a sudoku using 'back tracking' (or brute force!) */
 function solveSudoku(grid, row, col) {
 	cell = findUnassignedLocation(grid, row, col);
 	row = cell[0];
 	col = cell[1];
 
 	// base case: no empty cells in grid
-	if (row == 9) {
+	if (row == grid.length) {
 		postMessage("finished");
 		
 		return true;
 	}
 
-	for (var num = 1; num <= 9; num++) { 			
+	for (var num = 1; num <= grid.length; num++) {
 		if ( noConflicts(grid, row, col, num) ) {
 			
 			grid[row][col].value = num;
@@ -59,8 +60,12 @@ function solveSudoku(grid, row, col) {
 	return false;
 }
 
+/** Find next available cell (with value '0')
+ *  It starts at a given point (row,col) )in the grid and moves left to right
+ *  If no cell was found in row it moves to start of next row
+ */
 function findUnassignedLocation(grid, row, col) {
-	while (row < 9) {
+	while (row < grid.length) {
 
 		// if cell is empty
 		if (grid[row][col].value == 0) {
@@ -68,7 +73,7 @@ function findUnassignedLocation(grid, row, col) {
 		}
 		
 		// otherwise x next cell in grid
-		if (col < 8) {
+		if (col < (grid.length-1) ) {
 			col++;
 		}
 		else {
@@ -80,8 +85,9 @@ function findUnassignedLocation(grid, row, col) {
 	return [row, col];
 }
 
+/** Checks for conflicts of a number in a row, column and square */
 function noConflicts(grid, row, col, num) {
-	return isRowOk(grid, row, num) && isColOk(grid, col, num) && isBoxOk(grid, row, col, num);
+	return isRowOk(grid, row, num) && isColOk(grid, col, num) && isSquareOk(grid, row, col, num);
 }
 
 /** Checks if num is an acceptable value for the given row */
@@ -103,7 +109,7 @@ function isColOk(grid, col, num) {
 }
 
 /** Checks if num is an acceptable value for the box around row and col */
-function isBoxOk(grid, row, col, num) {
+function isSquareOk(grid, row, col, num) {
 	row = Math.floor(row / 3) * 3;
 	col = Math.floor(col / 3) * 3;
 
@@ -115,6 +121,7 @@ function isBoxOk(grid, row, col, num) {
 	return true;
 }
 
+/** This method occupies CPU for a while */
 function waitSome(val) {
 	while (val > 0) {
 		val--;
