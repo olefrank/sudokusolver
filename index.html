@@ -23,13 +23,11 @@
 				</td>
 			</tr>
 		</table>
-		<br>
-		
-		<div ng-switch on="isClicked">
-			<button ng-switch-when='false' ng-click='clickHandler()'>Løsning</button>
-			<button ng-switch-when='true' ng-click='clickHandler()'>Stop</button>
-		</div>
-		<p>{{numSteps}}</p>
+
+        <br>
+
+        <button ng-click="clickHandler()" ng-disabled="isSolving">{{ currentState.text }}</button>
+		<p>Number of steps: {{numSteps}}</p>
 	</div>
 
 </body>
