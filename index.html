@@ -19,15 +19,33 @@
 		<table>
 			<tr ng-repeat="row in solution">
 				<td ng-repeat="cell in row">
-					<input type="text" ng-show="cell.value != 0" ng-model="cell.value" ng-model-instant />
+					<input type="text" ng-show="cell.value != 0" ng-model="cell.value" ng-model-instant disabled="disabled"/>
 				</td>
 			</tr>
 		</table>
 
         <br>
 
-        <button ng-click="clickHandler()" ng-disabled="isSolving">{{ currentState.text }}</button>
+        <button class="game-button" ng-click="clickHandler()" ng-disabled="isSolving">{{ currentState.text }}</button>
 		<p>Number of steps: {{numSteps}}</p>
+
+        <!-- RADIO BUTTONS -->
+        <label>How fast should the solver be?</label>
+        <div class="form-group">
+            <label>
+                <input type="radio" name="solveSpeed" value="slow" ng-model="solveSpeed">
+                Slow
+            </label>
+            <label>
+                <input type="radio" name="solveSpeed" value="medium" ng-model="solveSpeed">
+                Medium
+            </label>
+            <label>
+                <input type="radio" name="solveSpeed" value="fast" ng-model="solveSpeed">
+                Fast
+            </label>
+        </div>
+
 	</div>
 
 </body>

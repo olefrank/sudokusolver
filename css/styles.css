@@ -14,17 +14,13 @@ td {
 	border: 1px solid #333;
 }
 
-input {
+input[type="text"] {
 	font-size: 32px;
 	text-align: center;
 	cursor: default;
 	border:0;
 	width: 60px;
 	height: 60px;
-}
-
-.cannotEdit {
-	background-color: Lightgray;
 }
 
 /* make sub matrixes with borders */
