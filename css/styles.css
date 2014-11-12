@@ -1,34 +1,79 @@
-#container {
-	text-align: center;
+body {
+    font-family: Helvetica Neue, Helvetica, Arial;
 }
-
+.container {
+	text-align: center;
+    padding: 10px 20px 0;
+}
+.container-left {
+    float: left;
+}
+.container-right {
+    float: right;
+}
+/**************/
+/* TABLE MAIN */
+/**************/
 table {
 	display: inline-block;
-	border: 1px solid black;
-	line-height: 0;
-	font-size: 0;
+    margin: 10px 0;
 }
 td {
-	width: 60px;
-	height: 60px;
-	border: 1px solid #333;
+    vertical-align: middle;
+    border: 1px solid #333;
 }
-
-input[type="text"] {
-	font-size: 32px;
-	text-align: center;
-	cursor: default;
-	border:0;
+.table-main {
+    border: 3px solid black;
+    font-size: 22pt;
+}
+.table-main td {
 	width: 60px;
 	height: 60px;
 }
 
 /* make sub matrixes with borders */
-tr:nth-child(3), 
-tr:nth-child(6) {
+.table-main tr:nth-child(3),
+.table-main tr:nth-child(6) {
 	border-bottom: 3px solid black;
 }
-td:nth-child(3), 
-td:nth-child(6) {
+.table-main td:nth-child(3),
+.table-main td:nth-child(6) {
 	border-right: 3px solid black;
+}
+
+
+
+/***************/
+/* TABLE SMALL */
+/***************/
+.table-small-container {
+    cursor: pointer;
+}
+
+.table-small {
+    border: 1px solid black;
+    font-size: 8pt;
+    -webkit-box-shadow: 0 0 0 0 #fff;
+    box-shadow: 0 0 0 0 #fff;
+    transition: box-shadow .1s ease-in-out;
+}
+
+.glow-edge-blue:hover {
+    -webkit-box-shadow: 0 0 20px 1px #1900FF;
+    box-shadow: 0 0 20px 1px #1900FF;
+}
+
+.table-small td {
+    width: 20px;
+    height: 20px;
+}
+
+/* make sub matrixes with borders */
+.table-small tr:nth-child(3),
+.table-small tr:nth-child(6) {
+    border-bottom: 2px solid black;
+}
+.table-small td:nth-child(3),
+.table-small td:nth-child(6) {
+    border-right: 2px solid black;
 }

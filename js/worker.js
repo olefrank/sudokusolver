@@ -4,7 +4,7 @@ self.addEventListener('message', function(e) {
 	    row = e.data.row,
 	    col = e.data.col;
 
-    interval = switchInterval(e.data.speed);
+    interval = getInterval(e.data.speed);
 
 	self.solveSudoku(grid, row, col);
 }, false);
@@ -12,7 +12,7 @@ self.addEventListener('message', function(e) {
 // solve sudoku with recursion
 var cell,
     o = {},
-    interval = 100000000;
+    interval = getInterval("default");
 
 /** Recursive function to solve a sudoku using 'back tracking' (or brute force!) */
 function solveSudoku(grid, row, col) {
@@ -39,7 +39,7 @@ function solveSudoku(grid, row, col) {
 			};
 			postMessage(o); // send data back
 
-			waitSome(interval);
+                waitSome(interval);
 
 			// if success -> stop!
 			if ( solveSudoku(grid, row, col) ) { 				
@@ -55,8 +55,9 @@ function solveSudoku(grid, row, col) {
 			};
 			postMessage(o); // send data back
 
-			waitSome(interval);
-		}	
+                waitSome(interval);
+
+		}
 	}
 	return false;
 }
@@ -129,7 +130,7 @@ function waitSome(val) {
 	}
 }
 
-function switchInterval(speed) {
+function getInterval(speed) {
     var result;
     switch ( speed.toLowerCase() ) {
         case "slow":
@@ -139,7 +140,10 @@ function switchInterval(speed) {
             result = 100000000;
             break;
         case "fast":
-            result = 20000000;
+            result = 10000000;
+            break;
+        case "warp":
+            result = 2000000;
             break;
         default:
             result = 100000000;

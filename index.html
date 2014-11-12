@@ -13,41 +13,99 @@
 	<script src="js/solution.service.js"></script>
 </head>
 
-<body>
+<body ng-controller="gameCtrl">
+    <div class="container">
 
-	<div id="container" ng-controller="gameCtrl">
-		<table>
-			<tr ng-repeat="row in solution">
-				<td ng-repeat="cell in row">
-					<input type="text" ng-show="cell.value != 0" ng-model="cell.value" ng-model-instant disabled="disabled"/>
-				</td>
-			</tr>
-		</table>
+        <div class="container-left">
 
-        <br>
+            <div class="table-small-container" ng-click="selectSolution(0)">
+                <table class="table-small glow-edge-blue">
+                    <tr ng-repeat="row in solutionI">
+                        <td ng-repeat="cell in row">
+                            <span ng-if="cell.value > 0">{{::cell.value}}</span>
+                            <span ng-if="cell.value == 0"> </span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="table-small-container" ng-click="selectSolution(1)">
+                <table class="table-small glow-edge-blue">
+                    <tr ng-repeat="row in solutionII">
+                        <td ng-repeat="cell in row">
+                            <span ng-if="cell.value > 0">{{::cell.value}}</span>
+                            <span ng-if="cell.value == 0"> </span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
-        <button class="game-button" ng-click="clickHandler()" ng-disabled="isSolving">{{ currentState.text }}</button>
-		<p>Number of steps: {{numSteps}}</p>
+        </div> <!-- end container-left -->
 
-        <!-- RADIO BUTTONS -->
-        <label>How fast should the solver be?</label>
-        <div class="form-group">
-            <label>
-                <input type="radio" name="solveSpeed" value="slow" ng-model="solveSpeed">
-                Slow
-            </label>
-            <label>
-                <input type="radio" name="solveSpeed" value="medium" ng-model="solveSpeed">
-                Medium
-            </label>
-            <label>
-                <input type="radio" name="solveSpeed" value="fast" ng-model="solveSpeed">
-                Fast
-            </label>
-        </div>
+        <div class="container-right">
 
-	</div>
+            <div class="table-small-container" ng-click="selectSolution(2)">
+                <table class="table-small glow-edge-blue">
+                    <tr ng-repeat="row in solutionIII">
+                        <td ng-repeat="cell in row">
+                            <span ng-if="cell.value > 0">{{::cell.value}}</span>
+                            <span ng-if="cell.value == 0"> </span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
+            <div class="table-small-container" ng-click="selectSolution(3)">
+                <!--<img src="img/solution3.png" alt=""/>-->
+                <table class="table-small glow-edge-blue">
+                    <tr ng-repeat="row in solutionIV">
+                        <td ng-repeat="cell in row">
+                            <span ng-if="cell.value > 0">{{::cell.value}}</span>
+                            <span ng-if="cell.value == 0"> </span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div> <!-- end container-right -->
+
+        <div class="center">
+            <table class="table-main">
+                <tr ng-repeat="row in solution">
+                    <td ng-repeat="cell in row">
+                        <span ng-if="cell.value > 0">{{cell.value}}</span>
+                        <span ng-if="cell.value == 0"> </span>
+                    </td>
+                </tr>
+            </table>
+
+            <br>
+
+            <button class="game-button" ng-click="clickHandler()" ng-disabled="isSolving">{{ currentState.text }}</button>
+            <p>Number of steps: {{numSteps}}</p>
+
+            <!-- RADIO BUTTONS -->
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="solveSpeed" value="slow" ng-model="solveSpeed">
+                    Slow
+                </label>
+                <label>
+                    <input type="radio" name="solveSpeed" value="medium" ng-model="solveSpeed">
+                    Medium
+                </label>
+                <label>
+                    <input type="radio" name="solveSpeed" value="fast" ng-model="solveSpeed">
+                    Fast
+                </label>
+                <label>
+                    <input type="radio" name="solveSpeed" value="warp" ng-model="solveSpeed">
+                    Warp
+                </label>
+            </div> <!-- end form-group -->
+
+        </div> <!-- end center -->
+
+    </div> <!-- end container -->
 </body>
 
 </html>

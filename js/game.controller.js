@@ -9,7 +9,14 @@ angular
 function gameCtrl($scope, solutionSvc) {
 
     var worker,
-        stateIndex = 0;
+        stateIndex = 0,
+        selectedSolution = 0;
+
+    $scope.selectSolution = function(id) {
+        selectedSolution = id;
+        $scope.solution = solutionSvc.getSolution(selectedSolution);
+
+    };
 
     // button states
     $scope.btnStates = [
@@ -64,7 +71,11 @@ function gameCtrl($scope, solutionSvc) {
      *  Reset solver
      */
     var reset = function() {
-        $scope.solution = solutionSvc.getSolution(2);
+        $scope.solution = solutionSvc.getSolution(selectedSolution);
+        $scope.solutionI = solutionSvc.getSolution(1);
+        $scope.solutionII = solutionSvc.getSolution(2);
+        $scope.solutionIII = solutionSvc.getSolution(3);
+        $scope.solutionIV = solutionSvc.getSolution(4);
         $scope.isSolving = false;
         $scope.numSteps = 0;
     };

@@ -3,11 +3,11 @@ angular
     .factory("solutionSvc", [function() {
 
         return {
-            getSolution: function(num) {
+            getSolution: function(id) {
                 var solution;
 
-                switch(num) {
-                    case 1:
+                switch(id) {
+                    case 0:
                         solution = [
                             [ {value: 0}, {value: 0}, {value: 8}, {value: 0}, {value: 0}, {value: 6}, {value: 0}, {value: 0}, {value: 4} ],
                             [ {value: 7}, {value: 0}, {value: 0}, {value: 2}, {value: 3}, {value: 0}, {value: 9}, {value: 0}, {value: 0} ],
@@ -20,7 +20,7 @@ angular
                             [ {value: 4}, {value: 0}, {value: 0}, {value: 5}, {value: 0}, {value: 0}, {value: 1}, {value: 0}, {value: 0} ]
                         ];
                         break;
-                    case 2:
+                    case 1:
                         solution = [
                             [ {value: 0}, {value: 0}, {value: 0}, {value: 7}, {value: 0}, {value: 6}, {value: 8}, {value: 0}, {value: 0} ],
                             [ {value: 0}, {value: 0}, {value: 8}, {value: 0}, {value: 0}, {value: 4}, {value: 0}, {value: 1}, {value: 7} ],
@@ -33,7 +33,7 @@ angular
                             [ {value: 0}, {value: 0}, {value: 2}, {value: 1}, {value: 0}, {value: 9}, {value: 0}, {value: 0}, {value: 0} ]
                         ];
                         break;
-                    case 3:
+                    case 2:
                         solution = [
                             [ {value: 0}, {value: 0}, {value: 8}, {value: 4}, {value: 0}, {value: 3}, {value: 5}, {value: 0}, {value: 6} ],
                             [ {value: 0}, {value: 0}, {value: 3}, {value: 1}, {value: 0}, {value: 2}, {value: 0}, {value: 0}, {value: 4} ],
@@ -46,7 +46,7 @@ angular
                             [ {value: 8}, {value: 0}, {value: 6}, {value: 9}, {value: 0}, {value: 1}, {value: 3}, {value: 0}, {value: 0} ]
                         ];
                         break;
-                    case 4:
+                    case 3:
                         solution = [
                             [ {value: 3}, {value: 0}, {value: 0}, {value: 0}, {value: 0}, {value: 6}, {value: 0}, {value: 0}, {value: 0} ],
                             [ {value: 0}, {value: 0}, {value: 0}, {value: 7}, {value: 0}, {value: 0}, {value: 0}, {value: 3}, {value: 0} ],
@@ -59,7 +59,7 @@ angular
                             [ {value: 0}, {value: 0}, {value: 0}, {value: 3}, {value: 0}, {value: 0}, {value: 0}, {value: 0}, {value: 5} ]
                         ];
                         break;
-                    case 5:
+                    case 4:
                         solution = [
                             [ {value: 0}, {value: 0}, {value: 0}, {value: 4}, {value: 2}, {value: 0}, {value: 0}, {value: 5}, {value: 0} ],
                             [ {value: 5}, {value: 0}, {value: 9}, {value: 0}, {value: 0}, {value: 0}, {value: 0}, {value: 0}, {value: 0} ],
