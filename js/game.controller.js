@@ -10,12 +10,12 @@ function gameCtrl($scope, solutionSvc) {
 
     var worker,
         stateIndex = 0,
-        selectedSolution = 0;
+        selectedSolution = 2;
 
     $scope.selectSolution = function(id) {
         selectedSolution = id;
         $scope.solution = solutionSvc.getSolution(selectedSolution);
-
+        reset();
     };
 
     // button states
@@ -28,7 +28,7 @@ function gameCtrl($scope, solutionSvc) {
     $scope.currentState = $scope.btnStates[stateIndex];
 
     // how fast the solver should work
-    $scope.solveSpeed = "medium";
+    $scope.solveSpeed = "fast";
 
     /**
      *  Button click handler
@@ -52,7 +52,7 @@ function gameCtrl($scope, solutionSvc) {
     /**
      *  Start solving puzzle
      */
-    var startSolving = function() {
+    function startSolving() {
         $scope.isSolving = true;
         worker = new Worker('js/worker.js');
         worker.addEventListener('message', workerHandler, false);
@@ -70,20 +70,22 @@ function gameCtrl($scope, solutionSvc) {
     /**
      *  Reset solver
      */
-    var reset = function() {
-        $scope.solution = solutionSvc.getSolution(selectedSolution);
-        $scope.solutionI = solutionSvc.getSolution(1);
-        $scope.solutionII = solutionSvc.getSolution(2);
-        $scope.solutionIII = solutionSvc.getSolution(3);
-        $scope.solutionIV = solutionSvc.getSolution(4);
+    function reset() {
+        if (typeof worker !== "undefined") {
+            worker.terminate();
+            worker = undefined;
+        }
+
         $scope.isSolving = false;
         $scope.numSteps = 0;
+        stateIndex = 0;
+        $scope.currentState = $scope.btnStates[stateIndex];
     };
 
     /**
      *  Handle messages from worker thread
      */
-    var workerHandler = function(e) {
+    function workerHandler(e) {
         if (e.data === "finished") {
             $scope.isSolving = false;
         }
@@ -99,10 +101,17 @@ function gameCtrl($scope, solutionSvc) {
     /**
      *  Update sudoku grid
      */
-    var updateGrid = function(row, col, num) {
+    function updateGrid(row, col, num) {
         $scope.solution[row][col].value = num;
         $scope.numSteps++;
     };
+
+    // load solutions
+    $scope.solution = solutionSvc.getSolution(selectedSolution);
+    $scope.solutionEasy = solutionSvc.getSolution(2);
+    $scope.solutionMedium = solutionSvc.getSolution(1);
+    $scope.solutionHard = solutionSvc.getSolution(4);
+    $scope.solutionEvil = solutionSvc.getSolution(3);
 
     reset();
 

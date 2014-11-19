@@ -3,109 +3,114 @@
 <html lang="da" ng-app="app">
 
 <head>
-	<title>Sudoku Solver</title>
-	<meta charset="utf-8" />
-	<link rel="stylesheet" type="text/css" href="css/meyer_css_reset.css">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
-	
-	<script src="lib/angular.min.js" type="text/javascript"></script>
-	<script src="js/game.controller.js" type="text/javascript"></script>
-	<script src="js/solution.service.js"></script>
+    <title>Sudoku Solver</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/meyer_css_reset.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+
+    <script src="lib/angular.min.js" type="text/javascript"></script>
+    <script src="js/game.controller.js" type="text/javascript"></script>
+    <script src="js/solution.service.js"></script>
 </head>
 
 <body ng-controller="gameCtrl">
-    <div class="container">
+<div class="container">
 
-        <div class="container-left">
+    <div class="container-left">
 
-            <div class="table-small-container" ng-click="selectSolution(0)">
-                <table class="table-small glow-edge-blue">
-                    <tr ng-repeat="row in solutionI">
-                        <td ng-repeat="cell in row">
-                            <span ng-if="cell.value > 0">{{::cell.value}}</span>
-                            <span ng-if="cell.value == 0"> </span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="table-small-container" ng-click="selectSolution(1)">
-                <table class="table-small glow-edge-blue">
-                    <tr ng-repeat="row in solutionII">
-                        <td ng-repeat="cell in row">
-                            <span ng-if="cell.value > 0">{{::cell.value}}</span>
-                            <span ng-if="cell.value == 0"> </span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-        </div> <!-- end container-left -->
-
-        <div class="container-right">
-
-            <div class="table-small-container" ng-click="selectSolution(2)">
-                <table class="table-small glow-edge-blue">
-                    <tr ng-repeat="row in solutionIII">
-                        <td ng-repeat="cell in row">
-                            <span ng-if="cell.value > 0">{{::cell.value}}</span>
-                            <span ng-if="cell.value == 0"> </span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="table-small-container" ng-click="selectSolution(3)">
-                <!--<img src="img/solution3.png" alt=""/>-->
-                <table class="table-small glow-edge-blue">
-                    <tr ng-repeat="row in solutionIV">
-                        <td ng-repeat="cell in row">
-                            <span ng-if="cell.value > 0">{{::cell.value}}</span>
-                            <span ng-if="cell.value == 0"> </span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-        </div> <!-- end container-right -->
-
-        <div class="center">
-            <table class="table-main">
-                <tr ng-repeat="row in solution">
+        <h1>Easy</h1>
+        <div class="table-small-container" ng-click="selectSolution(2)">
+            <table class="table-small glow-edge-blue">
+                <tr ng-repeat="row in solutionEasy">
                     <td ng-repeat="cell in row">
-                        <span ng-if="cell.value > 0">{{cell.value}}</span>
+                        <span ng-if="cell.value > 0">{{::cell.value}}</span>
                         <span ng-if="cell.value == 0"> </span>
                     </td>
                 </tr>
             </table>
+        </div>
 
-            <br>
+        <h1>Medium</h1>
+        <div class="table-small-container" ng-click="selectSolution(1)">
+            <table class="table-small glow-edge-blue">
+                <tr ng-repeat="row in solutionMedium">
+                    <td ng-repeat="cell in row">
+                        <span ng-if="cell.value > 0">{{::cell.value}}</span>
+                        <span ng-if="cell.value == 0"> </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-            <button class="game-button" ng-click="clickHandler()" ng-disabled="isSolving">{{ currentState.text }}</button>
-            <p>Number of steps: {{numSteps}}</p>
+    </div> <!-- end container-left -->
 
-            <!-- RADIO BUTTONS -->
-            <div class="form-group">
-                <label>
-                    <input type="radio" name="solveSpeed" value="slow" ng-model="solveSpeed">
-                    Slow
-                </label>
-                <label>
-                    <input type="radio" name="solveSpeed" value="medium" ng-model="solveSpeed">
-                    Medium
-                </label>
-                <label>
-                    <input type="radio" name="solveSpeed" value="fast" ng-model="solveSpeed">
-                    Fast
-                </label>
-                <label>
-                    <input type="radio" name="solveSpeed" value="warp" ng-model="solveSpeed">
-                    Warp
-                </label>
-            </div> <!-- end form-group -->
+    <div class="container-right">
 
-        </div> <!-- end center -->
+        <h1>Hard</h1>
+        <div class="table-small-container" ng-click="selectSolution(4)">
+            <table class="table-small glow-edge-blue">
+                <tr ng-repeat="row in solutionHard">
+                    <td ng-repeat="cell in row">
+                        <span ng-if="cell.value > 0">{{::cell.value}}</span>
+                        <span ng-if="cell.value == 0"> </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-    </div> <!-- end container -->
+        <h1>Evil</h1>
+        <div class="table-small-container" ng-click="selectSolution(3)">
+            <table class="table-small glow-edge-blue">
+                <tr ng-repeat="row in solutionEvil">
+                    <td ng-repeat="cell in row">
+                        <span ng-if="cell.value > 0">{{::cell.value}}</span>
+                        <span ng-if="cell.value == 0"> </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div> <!-- end container-right -->
+
+    <div class="center">
+        <h1>Magic Sudoku Solver!</h1>
+        <table class="table-main">
+            <tr ng-repeat="row in solution">
+                <td ng-repeat="cell in row">
+                    <span ng-if="cell.value > 0">{{cell.value}}</span>
+                    <span ng-if="cell.value == 0"> </span>
+                </td>
+            </tr>
+        </table>
+
+        <br>
+
+        <button class="game-button" ng-click="clickHandler()" ng-disabled="isSolving">{{ currentState.text }}</button>
+        <p>Number of steps: {{numSteps}}</p>
+
+        <!-- RADIO BUTTONS -->
+        <div class="form-group">
+            <label>
+                <input type="radio" name="solveSpeed" value="slow" ng-model="solveSpeed" ng-change="changeSpeed('slow')">
+                Slow
+            </label>
+            <label>
+                <input type="radio" name="solveSpeed" value="medium" ng-model="solveSpeed" ng-change="changeSpeed('medium')">
+                Medium
+            </label>
+            <label>
+                <input type="radio" name="solveSpeed" value="fast" ng-model="solveSpeed" ng-change="changeSpeed('fast')">
+                Fast
+            </label>
+            <label>
+                <input type="radio" name="solveSpeed" value="warp" ng-model="solveSpeed" ng-change="changeSpeed('warp')">
+                Warp
+            </label>
+        </div> <!-- end form-group -->
+
+    </div> <!-- end center -->
+
+</div> <!-- end container -->
 </body>
 
 </html>
