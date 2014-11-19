@@ -14,8 +14,10 @@ function gameCtrl($scope, solutionSvc) {
 
     $scope.selectSolution = function(id) {
         selectedSolution = id;
-        $scope.solution = solutionSvc.getSolution(selectedSolution);
+        killWorker();
         reset();
+        stateIndex = 0;
+        $scope.currentState = $scope.btnStates[stateIndex];
     };
 
     // button states
@@ -65,28 +67,30 @@ function gameCtrl($scope, solutionSvc) {
             speed: $scope.solveSpeed
         };
         worker.postMessage(o);
-    };
+    }
+
+    function killWorker() {
+        if (typeof worker !== "undefined") {
+            worker.terminate();
+            worker = undefined;
+        }
+    }
 
     /**
      *  Reset solver
      */
     function reset() {
-        if (typeof worker !== "undefined") {
-            worker.terminate();
-            worker = undefined;
-        }
-
         $scope.isSolving = false;
         $scope.numSteps = 0;
-        stateIndex = 0;
-        $scope.currentState = $scope.btnStates[stateIndex];
-    };
+        $scope.solution = solutionSvc.getSolution(selectedSolution);
+    }
 
     /**
      *  Handle messages from worker thread
      */
     function workerHandler(e) {
         if (e.data === "finished") {
+            killWorker();
             $scope.isSolving = false;
         }
         else {
@@ -96,7 +100,7 @@ function gameCtrl($scope, solutionSvc) {
             updateGrid(row, col, num);
         }
         $scope.$apply();
-    };
+    }
 
     /**
      *  Update sudoku grid
@@ -104,7 +108,7 @@ function gameCtrl($scope, solutionSvc) {
     function updateGrid(row, col, num) {
         $scope.solution[row][col].value = num;
         $scope.numSteps++;
-    };
+    }
 
     // load solutions
     $scope.solution = solutionSvc.getSolution(selectedSolution);
