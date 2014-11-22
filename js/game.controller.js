@@ -1,7 +1,5 @@
 "use strict";
 
-angular.module("app", []);
-
 angular
     .module("app")
     .controller("gameCtrl", ["$scope", "solutionSvc", gameCtrl]);
@@ -12,12 +10,22 @@ function gameCtrl($scope, solutionSvc) {
         stateIndex = 0,
         selectedSolution = 2;
 
+    // scope vars
+    $scope.solution = solutionSvc.getSolution(selectedSolution);
+    $scope.solutionEasy = solutionSvc.getSolution(2);
+    $scope.solutionMedium = solutionSvc.getSolution(1);
+    $scope.solutionHard = solutionSvc.getSolution(4);
+    $scope.solutionEvil = solutionSvc.getSolution(3);
+    $scope.isSolving = false;
+    $scope.numSteps = 0;
+    $scope.pctSolved = 0;
+
     $scope.selectSolution = function(id) {
         selectedSolution = id;
         killWorker();
         reset();
         stateIndex = 0;
-        $scope.currentState = $scope.btnStates[stateIndex];
+        $scope.btnState = $scope.btnStates[stateIndex];
     };
 
     // button states
@@ -27,7 +35,7 @@ function gameCtrl($scope, solutionSvc) {
     ];
 
     // current button state
-    $scope.currentState = $scope.btnStates[stateIndex];
+    $scope.btnState = $scope.btnStates[stateIndex];
 
     // how fast the solver should work
     $scope.solveSpeed = "fast";
@@ -37,7 +45,7 @@ function gameCtrl($scope, solutionSvc) {
      */
     $scope.clickHandler = function() {
         // switch states
-        switch ( $scope.currentState.text.toLowerCase() ) {
+        switch ( $scope.btnState.text.toLowerCase() ) {
             case "start" :
                 startSolving();
                 break;
@@ -48,7 +56,7 @@ function gameCtrl($scope, solutionSvc) {
 
         // switch to next state
         stateIndex = (stateIndex + 1) % $scope.btnStates.length;
-        $scope.currentState = $scope.btnStates[stateIndex];
+        $scope.btnState = $scope.btnStates[stateIndex];
     };
 
     /**
@@ -61,7 +69,7 @@ function gameCtrl($scope, solutionSvc) {
 
         // start worker with message
         var o = {
-            grid: $scope.solution,
+            grid: $scope.solution.rows,
             row: 0,
             col: 0,
             speed: $scope.solveSpeed
@@ -106,16 +114,10 @@ function gameCtrl($scope, solutionSvc) {
      *  Update sudoku grid
      */
     function updateGrid(row, col, num) {
-        $scope.solution[row][col].value = num;
+        $scope.solution.rows[row][col].value = num;
         $scope.numSteps++;
+        $scope.pctSolved = ($scope.numSteps / $scope.solution.steps) * 100;
     }
-
-    // load solutions
-    $scope.solution = solutionSvc.getSolution(selectedSolution);
-    $scope.solutionEasy = solutionSvc.getSolution(2);
-    $scope.solutionMedium = solutionSvc.getSolution(1);
-    $scope.solutionHard = solutionSvc.getSolution(4);
-    $scope.solutionEvil = solutionSvc.getSolution(3);
 
     reset();
 

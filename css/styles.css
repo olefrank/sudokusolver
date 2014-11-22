@@ -55,7 +55,7 @@ td {
     font-size: 8pt;
     -webkit-box-shadow: 0 0 0 0 #fff;
     box-shadow: 0 0 0 0 #fff;
-    transition: box-shadow .1s ease-in-out;
+    transition: box-shadow .1s linear;
 }
 
 .glow-edge-blue:hover {
@@ -77,3 +77,64 @@ td {
 .table-small td:nth-child(6) {
     border-right: 2px solid black;
 }
+
+/* INFO BAR */
+.info-bar {
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+.progress {
+    margin: 0;
+}
+
+.progress, .progress-bar {
+    height: 6px;
+    line-height: 6px;
+}
+
+.show-progress.ng-enter, .show-progress.ng-leave {
+    -webkit-transition: .3s ease-out opacity;
+    transition: .3s ease-out opacity;;
+}
+.show-progress.ng-enter {
+    opacity: 0;
+}
+.show-progress.ng-enter.ng-enter-active {
+    opacity: 1;
+}
+.show-progress.ng-leave {
+    opacity: 1;
+}
+.show-progress.ng-leave.ng-leave-active {
+    opacity: 0;
+}
+
+/*.show-progress.ng-enter, .show-progress.ng-leave {*/
+    /*-webkit-transition: .4s ease-out transform;*/
+    /*transition: .4s ease-out transform;*/
+
+    /*-webkit-transform: translateY(-50px);*/
+    /*transform: translateY(-50px);*/
+/*}*/
+/*.show-progress.ng-enter {*/
+    /*-webkit-transform: translateY(-50px);*/
+    /*transform: translateY(-50px);*/
+/*}*/
+/*.show-progress.ng-enter.ng-enter-active {*/
+    /*-webkit-transform: translateY(0px);*/
+    /*transform: translateY(0px);*/
+/*}*/
+/*.show-progress.ng-leave {*/
+    /*-webkit-transform: translateY(0px);*/
+    /*transform: translateY(0px);*/
+/*}*/
+/*.show-progress.ng-leave.ng-leave-active {*/
+    /*-webkit-transform: translateY(-50px);*/
+    /*transform: translateY(-50px);*/
+/*}*/

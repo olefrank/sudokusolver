@@ -5,23 +5,34 @@
 <head>
     <title>Sudoku Solver</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="css/meyer_css_reset.css">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" href="css/meyer_css_reset.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
 
-    <script src="lib/angular.min.js" type="text/javascript"></script>
-    <script src="js/game.controller.js" type="text/javascript"></script>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-animate.min.js"></script>
+    <script src="lib/ui-bootstrap-tpls-0.12.0.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/game.controller.js"></script>
     <script src="js/solution.service.js"></script>
 </head>
 
 <body ng-controller="gameCtrl">
+
+<div class="info-bar show-progress" ng-if="isSolving">
+    <progressbar type="info" animate="false" value="pctSolved" type="success"></progressbar>
+</div>
+
 <div class="container">
 
     <div class="container-left">
 
-        <h1>Easy</h1>
+        <h3>Easy</h3>
         <div class="table-small-container" ng-click="selectSolution(2)">
             <table class="table-small glow-edge-blue">
-                <tr ng-repeat="row in solutionEasy">
+                <tr ng-repeat="row in solutionEasy.rows">
                     <td ng-repeat="cell in row">
                         <span ng-if="cell.value > 0">{{::cell.value}}</span>
                         <span ng-if="cell.value == 0"> </span>
@@ -30,10 +41,10 @@
             </table>
         </div>
 
-        <h1>Medium</h1>
+        <h3>Medium</h3>
         <div class="table-small-container" ng-click="selectSolution(1)">
             <table class="table-small glow-edge-blue">
-                <tr ng-repeat="row in solutionMedium">
+                <tr ng-repeat="row in solutionMedium.rows">
                     <td ng-repeat="cell in row">
                         <span ng-if="cell.value > 0">{{::cell.value}}</span>
                         <span ng-if="cell.value == 0"> </span>
@@ -46,10 +57,10 @@
 
     <div class="container-right">
 
-        <h1>Hard</h1>
+        <h3>Hard</h3>
         <div class="table-small-container" ng-click="selectSolution(4)">
             <table class="table-small glow-edge-blue">
-                <tr ng-repeat="row in solutionHard">
+                <tr ng-repeat="row in solutionHard.rows">
                     <td ng-repeat="cell in row">
                         <span ng-if="cell.value > 0">{{::cell.value}}</span>
                         <span ng-if="cell.value == 0"> </span>
@@ -58,10 +69,10 @@
             </table>
         </div>
 
-        <h1>Evil</h1>
+        <h3>Evil</h3>
         <div class="table-small-container" ng-click="selectSolution(3)">
             <table class="table-small glow-edge-blue">
-                <tr ng-repeat="row in solutionEvil">
+                <tr ng-repeat="row in solutionEvil.rows">
                     <td ng-repeat="cell in row">
                         <span ng-if="cell.value > 0">{{::cell.value}}</span>
                         <span ng-if="cell.value == 0"> </span>
@@ -75,7 +86,7 @@
     <div class="center">
         <h1>Magic Sudoku Solver!</h1>
         <table class="table-main">
-            <tr ng-repeat="row in solution">
+            <tr ng-repeat="row in solution.rows">
                 <td ng-repeat="cell in row">
                     <span ng-if="cell.value > 0">{{cell.value}}</span>
                     <span ng-if="cell.value == 0"> </span>
@@ -85,8 +96,7 @@
 
         <br>
 
-        <button class="game-button" ng-click="clickHandler()" ng-disabled="isSolving">{{ currentState.text }}</button>
-        <p>Number of steps: {{numSteps}}</p>
+        <button class="btn" ng-class="btnState.text == 'Start' ? 'btn-success' : 'btn-danger'" ng-click="clickHandler()" ng-disabled="isSolving">{{ btnState.text }}</button>
 
         <!-- RADIO BUTTONS -->
         <div class="form-group">
