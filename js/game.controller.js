@@ -30,8 +30,9 @@ function gameCtrl($scope, solutionSvc) {
 
     // button states
     $scope.btnStates = [
-        { text: "Start" },
-        { text: "Reset" }
+        { id: 0, text: "Start" },
+        { id: 1, text: "Working..." },
+        { id: 2, text: "Reset" }
     ];
 
     // current button state
@@ -54,10 +55,14 @@ function gameCtrl($scope, solutionSvc) {
                 break;
         }
 
+        nextState();
+    };
+
+    function nextState() {
         // switch to next state
         stateIndex = (stateIndex + 1) % $scope.btnStates.length;
         $scope.btnState = $scope.btnStates[stateIndex];
-    };
+    }
 
     /**
      *  Start solving puzzle
@@ -100,6 +105,7 @@ function gameCtrl($scope, solutionSvc) {
         if (e.data === "finished") {
             killWorker();
             $scope.isSolving = false;
+            nextState();
         }
         else {
             var row = e.data.row;

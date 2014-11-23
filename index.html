@@ -63,7 +63,7 @@
                 <div class="container-fixed-main">
                     <div class="header">
                         <h1 class="pull-left">Magic Sudoku Solver!</h1>
-                        <button class="btn pull-right" ng-class="btnState.text == 'Start' ? 'btn-success' : 'btn-danger'" ng-click="clickHandler()" ng-disabled="isSolving">{{ btnState.text }}</button>
+                        <button class="btn pull-right" ng-class="{'btn-success': btnState.id == 0, 'btn-warning': btnState.id == 1, 'btn-danger': btnState.id == 2}" ng-click="clickHandler()" ng-disabled="isSolving">{{ btnState.text }}</button>
                     </div>
                     <table class="table-main">
                         <tr ng-repeat="row in solution.rows">
