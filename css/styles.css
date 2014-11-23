@@ -1,19 +1,23 @@
 body {
     font-family: Helvetica Neue, Helvetica, Arial;
 }
-.container {
-	text-align: center;
-    padding: 10px 20px 0;
+
+.header {
+    margin-top: 20px;
 }
-.container-left {
-    float: left;
+
+.header h1 {
+    margin-top: 0;
+    margin-bottom: 0;
 }
-.container-right {
-    float: right;
-}
+
 /**************/
 /* TABLE MAIN */
 /**************/
+.container-fixed-main {
+    margin: 0 auto;
+    max-width: 550px;
+}
 table {
 	display: inline-block;
     margin: 10px 0;
@@ -48,6 +52,8 @@ td {
 /***************/
 .table-small-container {
     cursor: pointer;
+    margin: 0 auto;
+    max-width: 164px;
 }
 
 .table-small {
@@ -56,11 +62,6 @@ td {
     -webkit-box-shadow: 0 0 0 0 #fff;
     box-shadow: 0 0 0 0 #fff;
     transition: box-shadow .1s linear;
-}
-
-.glow-edge-blue:hover {
-    -webkit-box-shadow: 0 0 20px 1px #1900FF;
-    box-shadow: 0 0 20px 1px #1900FF;
 }
 
 .table-small td {
@@ -76,6 +77,11 @@ td {
 .table-small td:nth-child(3),
 .table-small td:nth-child(6) {
     border-right: 2px solid black;
+}
+
+.glow-edge-blue:hover {
+    -webkit-box-shadow: 0 0 20px 1px #1900FF;
+    box-shadow: 0 0 20px 1px #1900FF;
 }
 
 /* INFO BAR */
@@ -114,27 +120,3 @@ td {
 .show-progress.ng-leave.ng-leave-active {
     opacity: 0;
 }
-
-/*.show-progress.ng-enter, .show-progress.ng-leave {*/
-    /*-webkit-transition: .4s ease-out transform;*/
-    /*transition: .4s ease-out transform;*/
-
-    /*-webkit-transform: translateY(-50px);*/
-    /*transform: translateY(-50px);*/
-/*}*/
-/*.show-progress.ng-enter {*/
-    /*-webkit-transform: translateY(-50px);*/
-    /*transform: translateY(-50px);*/
-/*}*/
-/*.show-progress.ng-enter.ng-enter-active {*/
-    /*-webkit-transform: translateY(0px);*/
-    /*transform: translateY(0px);*/
-/*}*/
-/*.show-progress.ng-leave {*/
-    /*-webkit-transform: translateY(0px);*/
-    /*transform: translateY(0px);*/
-/*}*/
-/*.show-progress.ng-leave.ng-leave-active {*/
-    /*-webkit-transform: translateY(-50px);*/
-    /*transform: translateY(-50px);*/
-/*}*/

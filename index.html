@@ -25,102 +25,111 @@
     <progressbar type="info" animate="false" value="pctSolved" type="success"></progressbar>
 </div>
 
-<div class="container">
+<div class="container text-center">
+    <div class="row">
 
-    <div class="container-left">
+        <div class="container-left">
+            <div class="col-md-2">
+                <div class="container-fixed-small">
+                    <h3>Easy</h3>
+                    <div class="table-small-container" ng-click="selectSolution(2)">
+                        <table class="table-small glow-edge-blue">
+                            <tr ng-repeat="row in solutionEasy.rows">
+                                <td ng-repeat="cell in row">
+                                    <span ng-if="cell.value > 0">{{::cell.value}}</span>
+                                    <span ng-if="cell.value == 0"> </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
 
-        <h3>Easy</h3>
-        <div class="table-small-container" ng-click="selectSolution(2)">
-            <table class="table-small glow-edge-blue">
-                <tr ng-repeat="row in solutionEasy.rows">
-                    <td ng-repeat="cell in row">
-                        <span ng-if="cell.value > 0">{{::cell.value}}</span>
-                        <span ng-if="cell.value == 0"> </span>
-                    </td>
-                </tr>
-            </table>
-        </div>
+                    <h3>Medium</h3>
+                    <div class="table-small-container" ng-click="selectSolution(1)">
+                        <table class="table-small glow-edge-blue">
+                            <tr ng-repeat="row in solutionMedium.rows">
+                                <td ng-repeat="cell in row">
+                                    <span ng-if="cell.value > 0">{{::cell.value}}</span>
+                                    <span ng-if="cell.value == 0"> </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div> <!-- end container-left -->
 
-        <h3>Medium</h3>
-        <div class="table-small-container" ng-click="selectSolution(1)">
-            <table class="table-small glow-edge-blue">
-                <tr ng-repeat="row in solutionMedium.rows">
-                    <td ng-repeat="cell in row">
-                        <span ng-if="cell.value > 0">{{::cell.value}}</span>
-                        <span ng-if="cell.value == 0"> </span>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        <div class="center">
+            <div class="col-md-8">
+                <div class="container-fixed-main">
+                    <div class="header">
+                        <h1 class="pull-left">Magic Sudoku Solver!</h1>
+                        <button class="btn pull-right" ng-class="btnState.text == 'Start' ? 'btn-success' : 'btn-danger'" ng-click="clickHandler()" ng-disabled="isSolving">{{ btnState.text }}</button>
+                    </div>
+                    <table class="table-main">
+                        <tr ng-repeat="row in solution.rows">
+                            <td ng-repeat="cell in row">
+                                <span ng-if="cell.value > 0">{{cell.value}}</span>
+                                <span ng-if="cell.value == 0"> </span>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <!-- RADIO BUTTONS -->
+                    <div class="form-group">
+                        <label>
+                            <input type="radio" name="solveSpeed" value="slow" ng-model="solveSpeed">
+                            Slow
+                        </label>
+                        <label>
+                            <input type="radio" name="solveSpeed" value="medium" ng-model="solveSpeed">
+                            Medium
+                        </label>
+                        <label>
+                            <input type="radio" name="solveSpeed" value="fast" ng-model="solveSpeed">
+                            Fast
+                        </label>
+                        <label>
+                            <input type="radio" name="solveSpeed" value="warp" ng-model="solveSpeed">
+                            Warp
+                        </label>
+                    </div> <!-- end form-group -->
+                </div>
+            </div> <!-- end col -->
+        </div> <!-- end center -->
 
-    </div> <!-- end container-left -->
+        <div class="container-right">
+            <div class="col-md-2">
+                <div class="container-fixed-small">
+                    <h3>Hard</h3>
+                    <div class="table-small-container" ng-click="selectSolution(4)">
+                        <table class="table-small glow-edge-blue">
+                            <tr ng-repeat="row in solutionHard.rows">
+                                <td ng-repeat="cell in row">
+                                    <span ng-if="cell.value > 0">{{::cell.value}}</span>
+                                    <span ng-if="cell.value == 0"> </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
 
-    <div class="container-right">
+                    <h3>Evil</h3>
+                    <div class="table-small-container" ng-click="selectSolution(3)">
+                        <table class="table-small glow-edge-blue">
+                            <tr ng-repeat="row in solutionEvil.rows">
+                                <td ng-repeat="cell in row">
+                                    <span ng-if="cell.value > 0">{{::cell.value}}</span>
+                                    <span ng-if="cell.value == 0"> </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div> <!-- end container-right -->
 
-        <h3>Hard</h3>
-        <div class="table-small-container" ng-click="selectSolution(4)">
-            <table class="table-small glow-edge-blue">
-                <tr ng-repeat="row in solutionHard.rows">
-                    <td ng-repeat="cell in row">
-                        <span ng-if="cell.value > 0">{{::cell.value}}</span>
-                        <span ng-if="cell.value == 0"> </span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <h3>Evil</h3>
-        <div class="table-small-container" ng-click="selectSolution(3)">
-            <table class="table-small glow-edge-blue">
-                <tr ng-repeat="row in solutionEvil.rows">
-                    <td ng-repeat="cell in row">
-                        <span ng-if="cell.value > 0">{{::cell.value}}</span>
-                        <span ng-if="cell.value == 0"> </span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-    </div> <!-- end container-right -->
-
-    <div class="center">
-        <h1>Magic Sudoku Solver!</h1>
-        <table class="table-main">
-            <tr ng-repeat="row in solution.rows">
-                <td ng-repeat="cell in row">
-                    <span ng-if="cell.value > 0">{{cell.value}}</span>
-                    <span ng-if="cell.value == 0"> </span>
-                </td>
-            </tr>
-        </table>
-
-        <br>
-
-        <button class="btn" ng-class="btnState.text == 'Start' ? 'btn-success' : 'btn-danger'" ng-click="clickHandler()" ng-disabled="isSolving">{{ btnState.text }}</button>
-
-        <!-- RADIO BUTTONS -->
-        <div class="form-group">
-            <label>
-                <input type="radio" name="solveSpeed" value="slow" ng-model="solveSpeed">
-                Slow
-            </label>
-            <label>
-                <input type="radio" name="solveSpeed" value="medium" ng-model="solveSpeed">
-                Medium
-            </label>
-            <label>
-                <input type="radio" name="solveSpeed" value="fast" ng-model="solveSpeed">
-                Fast
-            </label>
-            <label>
-                <input type="radio" name="solveSpeed" value="warp" ng-model="solveSpeed">
-                Warp
-            </label>
-        </div> <!-- end form-group -->
-
-    </div> <!-- end center -->
-
+    </div> <!-- end row -->
 </div> <!-- end container -->
+
 </body>
 
 </html>
